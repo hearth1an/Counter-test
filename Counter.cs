@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Counter : MonoBehaviour
+public class Counter1 : MonoBehaviour
 {
     [SerializeField] private Text _counterText;
 
@@ -11,11 +11,18 @@ public class Counter : MonoBehaviour
     private bool _isCounting = false;
 
     private Coroutine _counterCoroutine;
+    private WaitForSeconds _waitForSeconds;
 
+    private void Start()
+    {
+        _waitForSeconds = new WaitForSeconds(_count);
+    }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        int button = 0;
+
+        if (Input.GetMouseButtonDown(button))
         {
             if (_isCounting)
             {
@@ -24,7 +31,6 @@ public class Counter : MonoBehaviour
             }
             else
             {
-                // Запуск корутины
                 _counterCoroutine = StartCoroutine(CounterRoutine());
                 _isCounting = true;
             }
@@ -35,9 +41,9 @@ public class Counter : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(_count);
-            _minNumber++;
+            yield return _waitForSeconds;
 
+            _minNumber++;
             _counterText.text = "Счётчик: " + _minNumber;
         }
     }
