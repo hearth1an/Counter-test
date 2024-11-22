@@ -44,7 +44,7 @@ public class Counter1 : MonoBehaviour
             yield return _waitForSeconds;
 
             _minNumber++;
-            _counterText.text = "Ñ÷¸ò÷èê: " + _minNumber;
+            _counterText.text = "Count: " + _minNumber;
         }
     }
 }
